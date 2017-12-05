@@ -1,0 +1,56 @@
+Using host4 as its set up to boot onto same native vlan has hosts1, 2, 3, host5 is set up for remote dhcp relay
+
+{master:0}
+bfournie@sw01-dist-1b-b12.rdu2> show configuration interfaces ae12    
+description "host02.beaker.tripleo.lab.eng.rdu2 bond0";
+aggregated-ether-options {
+    lacp {
+        passive;
+    }
+}
+unit 0 {
+    family ethernet-switching {
+        port-mode trunk;
+        vlan {
+            members [ 101 104 201 203-205 2001-2005 ];
+        }
+        native-vlan-id 102;
+    }
+}
+
+{master:0}
+bfournie@sw01-dist-1b-b12.rdu2> show configuration interfaces ae14    
+description "host04.beaker.tripleo.lab.eng.rdu2 bond0";
+aggregated-ether-options {
+    lacp {
+        passive;
+    }
+}
+unit 0 {
+    family ethernet-switching {
+        port-mode trunk;
+        vlan {
+            members [ 101 104 201 203-205 2001-2005 ];
+        }
+        native-vlan-id 102;
+    }
+}
+
+{master:0}
+bfournie@sw01-dist-1b-b12.rdu2> show configuration interfaces ae15    
+description "host05.beaker.tripleo.lab.eng.rdu2 bond0";
+aggregated-ether-options {
+    lacp {
+        passive;
+    }
+}
+unit 0 {
+    family ethernet-switching {
+        port-mode trunk;
+        vlan {
+            members [ 101-102 104 107 201 203-205 2001-2005 ];
+        }
+        native-vlan-id 106;
+    }
+}
+
