@@ -1,0 +1,14 @@
+nodes:
+  - name: ironic-0
+    driver: pxe_ipmitool
+    driver_info:
+      ipmi_address: 10.9.10.111 
+      ipmi_username: root 
+      ipmi_password: calvin 
+    properties:
+      cpus: 2 
+      cpu_arch: x86_64
+      memory_mb: 4096 
+      local_gb: 40 
+    ports:
+      - address: B0:83:FE:C6:5C:48 

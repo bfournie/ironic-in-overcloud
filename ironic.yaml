@@ -1,0 +1,15 @@
+parameter_defaults:
+  IronicCleaningDiskErase: metadata
+
+# this list contains both the GPU-required filters as well as the ironic-required fones
+  NovaSchedulerDefaultFilters:
+    - RetryFilter
+    - AggregateInstanceExtraSpecsFilter
+    - AvailabilityZoneFilter
+    - RamFilter
+    - DiskFilter
+    - ComputeFilter
+    - ComputeCapabilitiesFilter
+    - ImagePropertiesFilter
+    - PciPassthroughFilter
+

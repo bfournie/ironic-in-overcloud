@@ -1,0 +1,33 @@
+{
+  "nodes": [
+    {
+      "name": "host2",
+      "pm_password": "calvin",
+      "pm_type": "pxe_ipmitool",
+      "cpu":"2",
+      "memory":"4096",
+      "disk":"40",
+      "arch":"x86_64",
+      "mac": [
+        "B0:83:FE:C6:63:86"
+      ],
+      "pm_user": "root",
+      "pm_addr": "10.9.10.109"
+    },
+    {
+      "name": "host3",
+      "pm_password": "calvin",
+      "pm_type": "pxe_ipmitool",
+      "cpu":"2",
+      "memory":"4096",
+      "disk":"40",
+      "arch":"x86_64",
+      "mac": [
+        "B0:83:FE:C6:53:21"
+      ],
+      "pm_user": "root",
+      "pm_addr": "10.9.10.110"
+    }
+  ]
+}
+
