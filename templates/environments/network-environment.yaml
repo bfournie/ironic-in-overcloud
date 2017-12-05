@@ -1,0 +1,51 @@
+#This file is an example of an environment file for defining the isolated
+#networks and related parameters.
+resource_registry:
+  # Network Interface templates to use (these files must exist)
+  OS::TripleO::Compute::Net::SoftwareConfig: ../nic-configs/compute.yaml
+  OS::TripleO::Controller::Net::SoftwareConfig: ../nic-configs/controller.yaml
+
+parameter_defaults:
+  # This section is where deployment-specific configuration is done
+  # Customize the IP subnets to match the local environment
+  ControllerCount: 1
+  ComputeCount: 1
+  InternalApiNetCidr: 172.17.0.0/24
+  StorageNetCidr: 172.18.0.0/24
+  StorageMgmtNetCidr: 172.21.2.0/24
+  TenantNetCidr: 172.16.0.0/24
+  ExternalNetCidr: 10.8.145.0/24
+  # CIDR subnet mask length for provisioning network
+  ControlPlaneSubnetCidr: '24'
+  # Customize the IP ranges on each network to use for static IPs and VIPs
+  InternalApiAllocationPools: [{'start': '172.17.0.10', 'end': '172.17.0.200'}]
+  StorageAllocationPools: [{'start': '172.18.0.10', 'end': '172.18.0.200'}]
+  StorageMgmtAllocationPools: [{'start': '172.21.2.10', 'end': '172.21.2.200'}]
+  TenantAllocationPools: [{'start': '172.16.0.10', 'end': '172.16.0.200'}]
+  # Leave room if the external network is also used for floating IPs
+  ExternalAllocationPools: [{'start': '10.8.145.10', 'end': '10.8.145.50'}]
+  # Gateway router for the external network
+  ExternalInterfaceDefaultRoute: 10.8.145.254
+  # Gateway router for the provisioning network (or Undercloud IP)
+  ControlPlaneDefaultRoute: 10.8.146.1
+  # Generally the IP of the Undercloud
+  EC2MetadataIp: 10.8.146.1
+  # Define the DNS servers (maximum 2) for the overcloud nodes ??
+  DnsServers: ["8.8.8.8"]
+  # DnsServers: ["10.16.36.29","10.11.5.19"]
+  # Customize the VLAN IDs to match the local environment
+  InternalApiNetworkVlanID: 201 
+  StorageNetworkVlanID: 204 
+  StorageMgmtNetworkVlanID: 205 
+  TenantNetworkVlanID: 203 
+  ExternalNetworkVlanID: 101 
+  # Set to empty string to enable multiple external networks or VLANs
+  NeutronNetworkVLANRanges: 'datacentre:1500:2048'
+  NeutronExternalNetworkBridge: "''"
+  # Customize bonding options, e.g. "mode=4 lacp_rate=1 updelay=1000 miimon=100"
+  BondInterfaceOvsOptions: "bond_mode=4 lacp_rate=1 updelay=1000 miimon=100"
+  ServiceNetMap:
+     SwiftStorageNetwork: storage
+     CephClusterNetwork: storage
+     IronicApiNetwork: storage_mgmt # changed from ctlplane
+     IronicNetwork: storage_mgmt # changed from ctlplane
